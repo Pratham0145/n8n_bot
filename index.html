@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>File Upload</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      background-color: #f9f9f9;
+    }
+
+
+
+    .upload-left {
+      flex: 2;
+      text-align: center;
+      padding-right: 20px;
+      border-right: 1px solid #eee;
+    }
+
+    .upload-left img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .upload-left h2 {
+      font-size: 1.4em;
+      margin-bottom: 20px;
+    }
+
+    .upload-left button {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .upload-left button:hover {
+      background: #0056b3;
+    }
+
+
+
+    #dropzone {
+      border: 2px dashed #ccc;
+      padding: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #dropzone.dragover {
+      background-color: #eef6ff;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+  }
+    .upload-container {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #77868f; /* Optional: in case image doesn't cover */
+  }
+  .upload-container img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+  }
+
+  </style>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+  <script src="avatar3d.js"></script>
+  <script src="chat-widget.js"></script> -->
+
+</head>
+<body>
+
+
+
+
+  <div class="upload-container">
+      <!-- <img src="image (8).png" alt="Upload Cloud Icon" /> -->
+      <!-- <h2>Drag files to upload</h2>
+      <button id="fileSelect">Select files to upload</button>
+      <input type="file" id="fileElem" multiple /> -->
+  </div>
+
+    <!-- Load config first -->
+    <!-- <script src="config.js"></script>
+    <script>
+        const dropzone = document.getElementById("dropzone");
+        const fileInput = document.getElementById("fileElem");
+        const fileSelect = document.getElementById("fileSelect");
+        const webhookUrl = window.ChatWidgetConfig?.webhook?.url;
+
+        let selectedFiles = [];
+
+        const responseContainer = document.createElement("div");
+        responseContainer.style.marginTop = "30px";
+        responseContainer.style.fontFamily = "Arial, sans-serif";
+        responseContainer.style.fontSize = "1em";
+        document.body.appendChild(responseContainer);
+
+        fileSelect.addEventListener("click", () => fileInput.click());
+
+        fileInput.addEventListener("change", () => {
+            selectedFiles = [...fileInput.files];
+            uploadFiles();
+        });
+
+        dropzone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropzone.classList.add("dragover");
+        });
+
+        dropzone.addEventListener("dragleave", () => {
+            dropzone.classList.remove("dragover");
+        });
+
+        dropzone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dropzone.classList.remove("dragover");
+            selectedFiles = [...e.dataTransfer.files];
+            uploadFiles();
+        });
+
+        function uploadFiles() {
+            if (!selectedFiles.length) return;
+
+            responseContainer.innerHTML = ""; // Clear previous responses
+
+            selectedFiles.forEach(file => {
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const statusDiv = document.createElement("div");
+            statusDiv.style.marginBottom = "10px";
+            statusDiv.innerHTML = `📤 <strong>${file.name}</strong> — <em>Uploading...</em>`;
+            responseContainer.appendChild(statusDiv);
+
+            fetch(webhookUrl, {
+                method: "POST",
+                body: formData,
+            })
+            .then(res => res.json())
+            .then(data => {
+                const cleanMessage = data.output || "Upload successful";
+                statusDiv.innerHTML = `✅ <strong>${file.name}</strong>: ${cleanMessage}`;
+            })
+            .catch(err => {
+                statusDiv.innerHTML = `❌ <strong>${file.name}</strong>: Upload failed — ${err.message}`;
+            });
+            });
+        }
+    </script> -->
+
+
+
+
+  <!-- Widget Configuration -->
+    <script>
+      window.ChatWidgetConfig = {
+          // webhook: {
+          //     url: 'http://localhost:5678/webhook/a889d2ae-2159-402f-b326-5f61e90f602e/chat',
+          // },
+          wss: {
+              // url:"ws://10.0.13.74:8091?client_id=upc20011&workflow_id=db78c16d-056d-4474-9140-e76f2cc42319"
+              url:"ws://10.0.13.74:8092?client_id=upc20011&workflow_id=b333245b-f6bf-4ca1-8154-9a2326ba8d55"
+              // url: 'ws://10.0.13.74:8091?client_id=parthi123&workflow_id=41b88328-81b0-45ca-a920-2190eba03164'
+              // url: 'ws://10.0.13.74:8090?client_id=anu123&workflow_id=df65063a-7271-4368-b3d0-4ea773b87529&smsNumbers=94464249&name=Gokul Sajan&serviceId=61808338586'
+              // url: 'ws://10.0.13.74:8090?client_id=contract123874&workflow_id=7070b6aa-0c7d-4c7b-acd1-131cb246faf6'
+              // url : 'ws://10.0.13.74:8092?client_id=test123&workflow_id=7070b6aa-0c7d-4c7b-acd1-131cb246faf6'
+          }
+      };
+    </script>
+
+    <script>
+        window.handleCustomEvent = function(type, event) {
+            console.log("Event type " + type + ": " + JSON.stringify(event));
+        }
+    </script>
+    
+    
+    <!-- Load the chat widget script -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="avatar3d.js"></script>
+    <script src="chat-widget.js" defer></script>
+
+</body>
+</html>
