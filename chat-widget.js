@@ -1,3 +1,8 @@
+// Version: 0.0.6
+// Author: Prathamesh Patil
+// Date: 2025-07-03
+// Description: 1. Added ping/pong functionality to maintain WebSocket connection and prevent disconnection due to inactivity.
+//              2. Optimized table popup css for better view.
 
 (function() {
     // Create and inject styles (updated with audio player and recording feedback)
@@ -13,12 +18,12 @@
 
     .n8n-chat-widget .chat-container {
         position: fixed;
-        bottom: 20px;
-        right: 20px;
+        bottom: 0px;
+        right: 0px;
         z-index: 1000;
         display: none;
-        width: 350px;
-        height: 500px;
+        width: 100%;
+        height: 100%;
         background: var(--chat--color-background);
         border-radius: 20px;
         box-shadow: 0 8px 32px rgba(133, 79, 255, 0.15);
@@ -27,17 +32,15 @@
         font-family: inherit;
         resize: none;
         transition: none;
-        max-width: calc(100vw - 20px);
-        max-height: calc(100vh - 20px);
     }
 
     .n8n-chat-widget .chat-container.position-left {
-        right: 20px;
+        right: 0px;
     }
 
     .n8n-chat-widget .chat-container.open {
-        bottom: 20px;
-        right: 20px;
+        bottom: 0px;
+        right: 0px;
         display: flex;
         flex-direction: column;
     }
@@ -47,15 +50,15 @@
     }
 
     .n8n-chat-widget .chat-container.open:not(.position-left) {
-        right: 20px;
+        right: 0px;
     }
 
 
 
     .n8n-chat-widget .chat-container,
     .n8n-chat-widget .chat-container.open {
-        bottom: 25px;
-        right: 20px;
+        bottom: 0px;
+        right: 0px;
         border-color:rgb(50, 0, 107)  #5c006b  rgb(8, 49, 130)  rgb(8, 49, 130);
         border-right-width: thick;
         border-left-width: thick;
@@ -1500,8 +1503,8 @@
     window.addEventListener('resize', () => {
     const chatContainer = document.querySelector('.n8n-chat-widget .chat-container');
     if (chatContainer && chatContainer.classList.contains('open')) {
-        chatContainer.style.bottom = '30px';
-        chatContainer.style.right = '20px';
+        // chatContainer.style.bottom = '30px';
+        // chatContainer.style.right = '20px';
         chatContainer.style.borderColor = 'rgb(50, 0, 107)  #5c006b  rgb(8, 49, 130)  rgb(8, 49, 130)';
         chatContainer.style.borderRightWidth = 'thick';
         chatContainer.style.borderLeftWidth = 'thick';
@@ -1569,11 +1572,7 @@
                             <path d="M0 0 C-6.625 3 -6.625 3 -10 3 C-10 2.01 -10 1.02 -10 0 C-3.375 -1.125 -3.375 -1.125 0 0 Z " fill="#D4D6D7" transform="translate(36,46)"/>
                             </svg></span>
 
-                    <button class="fullscreen-button" title="Toggle Fullscreen">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path d="M344 0L488 0c13.3 0 24 10.7 24 24l0 144c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-39-39-87 87c-9.4 9.4-24.6 9.4-33.9 0l-32-32c-9.4-9.4-9.4-24.6 0-33.9l87-87L327 41c-6.9-6.9-8.9-17.2-5.2-26.2S334.3 0 344 0zM168 512L24 512c-13.3 0-24-10.7-24-24L0 344c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2l39 39 87-87c9.4-9.4 24.6-9.4 33.9 0l32 32c9.4 9.4 9.4 24.6 0 33.9l-87 87 39 39c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8z"/>
-                        </svg>
-                    </button>
+
                     <button class="refresh-button" title="Refresh chat">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                             <path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
@@ -1669,65 +1668,68 @@
         //     });
         // });
 
-		// After the refreshButton event listener
-		const fullscreenButton = chatContainer.querySelector('.fullscreen-button');
-		let isFullscreen = false;
-		let originalStyles = {};
+		
+        
+        
+        // // After the refreshButton event listener
+		// const fullscreenButton = chatContainer.querySelector('.fullscreen-button');
+		// let isFullscreen = false;
+		// let originalStyles = {};
 
-		fullscreenButton.addEventListener('click', () => {
-			if (!isFullscreen) {
-				// Save original styles
-				originalStyles = {
-					width: chatContainer.style.width || '380px',
-					height: chatContainer.style.height || '450px',
-					left: chatContainer.style.left || '',
-					top: chatContainer.style.top || '',
-					right: chatContainer.style.right || '20px',
-					bottom: chatContainer.style.bottom || '20px',
-					position: chatContainer.style.position || 'fixed'
-				};
+		// fullscreenButton.addEventListener('click', () => {
+		// 	if (!isFullscreen) {
+		// 		// Save original styles
+		// 		originalStyles = {
+		// 			width: chatContainer.style.width || '380px',
+		// 			height: chatContainer.style.height || '450px',
+		// 			left: chatContainer.style.left || '',
+		// 			top: chatContainer.style.top || '',
+		// 			right: chatContainer.style.right || '20px',
+		// 			bottom: chatContainer.style.bottom || '20px',
+		// 			position: chatContainer.style.position || 'fixed'
+		// 		};
 
-				// Apply full-screen styles
-				chatContainer.style.width = '100vw';
-				chatContainer.style.height = '100vh';
-				chatContainer.style.left = '0';
-				chatContainer.style.top = '0';
-				chatContainer.style.right = 'auto';
-				chatContainer.style.bottom = 'auto';
-				chatContainer.style.borderRadius = '0';
-				chatContainer.style.boxShadow = 'none';
+		// 		// Apply full-screen styles
+		// 		chatContainer.style.width = '100%';
+		// 		chatContainer.style.height = '100%';
+		// 		chatContainer.style.left = '0';
+		// 		chatContainer.style.top = '0';
+		// 		chatContainer.style.right = '100%';
+		// 		chatContainer.style.bottom = '100%';
+		// 		chatContainer.style.borderRadius = '0';
+		// 		chatContainer.style.boxShadow = 'none';
 
-				// Update button icon to "minimize"
-				fullscreenButton.innerHTML = `
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->\
-						<path d="M439 7c9.4-9.4 24.6-9.4 33.9 0l32 32c9.4 9.4 9.4 24.6 0 33.9l-87 87 39 39c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8l-144 0c-13.3 0-24-10.7-24-24l0-144c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2l39 39L439 7zM72 272l144 0c13.3 0 24 10.7 24 24l0 144c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-39-39L73 505c-9.4 9.4-24.6 9.4-33.9 0L7 473c-9.4-9.4-9.4-24.6 0-33.9l87-87L55 313c-6.9-6.9-8.9-17.2-5.2-26.2s12.5-14.8 22.2-14.8z"/>
-					</svg>
-				`;
-				fullscreenButton.title = 'Minimize';
-				isFullscreen = true;
-			} else {
-				// Restore original styles
-				chatContainer.style.width = originalStyles.width;
-				chatContainer.style.height = originalStyles.height;
-				chatContainer.style.left = originalStyles.left;
-				chatContainer.style.top = originalStyles.top;
-				chatContainer.style.right = originalStyles.right;
-				chatContainer.style.bottom = originalStyles.bottom;
-				chatContainer.style.position = originalStyles.position;
-				chatContainer.style.borderRadius = '12px';
-				chatContainer.style.boxShadow = '0 8px 32px rgba(133, 79, 255, 0.15)';
+		// 		// Update button icon to "minimize"
+		// 		fullscreenButton.innerHTML = `
+		// 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->\
+		// 				<path d="M439 7c9.4-9.4 24.6-9.4 33.9 0l32 32c9.4 9.4 9.4 24.6 0 33.9l-87 87 39 39c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8l-144 0c-13.3 0-24-10.7-24-24l0-144c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2l39 39L439 7zM72 272l144 0c13.3 0 24 10.7 24 24l0 144c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-39-39L73 505c-9.4 9.4-24.6 9.4-33.9 0L7 473c-9.4-9.4-9.4-24.6 0-33.9l87-87L55 313c-6.9-6.9-8.9-17.2-5.2-26.2s12.5-14.8 22.2-14.8z"/>
+		// 			</svg>
+		// 		`;
+		// 		fullscreenButton.title = 'Minimize';
+		// 		isFullscreen = true;
+		// 	} else {
+		// 		// Restore original styles
+		// 		chatContainer.style.width = originalStyles.width;
+		// 		chatContainer.style.height = originalStyles.height;
+		// 		chatContainer.style.left = originalStyles.left;
+		// 		chatContainer.style.top = originalStyles.top;
+		// 		chatContainer.style.right = originalStyles.right;
+		// 		chatContainer.style.bottom = originalStyles.bottom;
+		// 		chatContainer.style.position = originalStyles.position;
+		// 		chatContainer.style.borderRadius = '12px';
+		// 		chatContainer.style.boxShadow = '0 8px 32px rgba(133, 79, 255, 0.15)';
 
-				// Restore full-screen button icon
-				fullscreenButton.innerHTML = `
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-						<path d="M344 0L488 0c13.3 0 24 10.7 24 24l0 144c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-39-39-87 87c-9.4 9.4-24.6 9.4-33.9 0l-32-32c-9.4-9.4-9.4-24.6 0-33.9l87-87L327 41c-6.9-6.9-8.9-17.2-5.2-26.2S334.3 0 344 0zM168 512L24 512c-13.3 0-24-10.7-24-24L0 344c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2l39 39 87-87c9.4-9.4 24.6-9.4 33.9 0l32 32c9.4 9.4 9.4 24.6 0 33.9l-87 87 39 39c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8z"/>
-					</svg>
+		// 		// Restore full-screen button icon
+		// 		fullscreenButton.innerHTML = `
+		// 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+		// 				<path d="M344 0L488 0c13.3 0 24 10.7 24 24l0 144c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-39-39-87 87c-9.4 9.4-24.6 9.4-33.9 0l-32-32c-9.4-9.4-9.4-24.6 0-33.9l87-87L327 41c-6.9-6.9-8.9-17.2-5.2-26.2S334.3 0 344 0zM168 512L24 512c-13.3 0-24-10.7-24-24L0 344c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2l39 39 87-87c9.4-9.4 24.6-9.4 33.9 0l32 32c9.4 9.4 9.4 24.6 0 33.9l-87 87 39 39c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8z"/>
+		// 			</svg>
 
-				`;
-				fullscreenButton.title = 'Toggle Fullscreen';
-				isFullscreen = false;
-			}
-		});
+		// 		`;
+		// 		fullscreenButton.title = 'Toggle Fullscreen';
+		// 		isFullscreen = true;
+		// 	}
+		// });
 
 
 
@@ -2375,7 +2377,7 @@
                 
                 if (timeSinceLastActivity >= oneMinute && socket.readyState === WebSocket.OPEN) {
                     const pingMessage = { type: "ping" };
-                    console.log("📤 Sending smart ping after", Math.round(timeSinceLastActivity / 1000), "seconds of inactivity");
+                    // console.log("📤 Sending smart ping after", Math.round(timeSinceLastActivity / 1000), "seconds of inactivity");
                     socket.send(JSON.stringify(pingMessage));
                     updateLastActivity(); // Update activity time after sending ping
                 }
@@ -2491,18 +2493,18 @@
                             updateLastActivity(); // Update activity when receiving any message
                             
                             const receivedData = JSON.parse(event.data);
-                            console.log("recvied------",receivedData);
+                            // console.log("recvied------",receivedData);
                             if (receivedData.error) {
-                                console.error('Server error:', receivedData.error);
+                                // console.error('Server error:', receivedData.error);
                                 if (receivedData.receivedMessage) {
                                     try {
                                         const innerMessage = JSON.parse(receivedData.receivedMessage);
-                                        console.log('Parsed inner message:', innerMessage);
+                                        // console.log('Parsed inner message:', innerMessage);
                                         if (innerMessage.type === 'pong') {
-                                            console.log('📥 Pong received 1:', innerMessage);
+                                            // console.log('📥 Pong received 1:', innerMessage);
                                         } else if (innerMessage.type === 'ping') {
                                             const pongMessage = { type: 'pong' };
-                                            console.log('📤 got ping so Sending pong:', pongMessage);
+                                            // console.log('📤 got ping so Sending pong:', pongMessage);
                                             socket.send(JSON.stringify(pongMessage));
                                             updateLastActivity(); // Update activity after sending pong
                                         }
@@ -2512,11 +2514,11 @@
                                 }
                             } else if (receivedData.type && receivedData.type.includes('Send "PING"')) {
                                 const pongMessage = { type: 'ping' };
-                                console.log('📤 got connection so Sending ping:', pongMessage);
+                                // console.log('📤 got connection so Sending ping:', pongMessage);
                                 socket.send(JSON.stringify(pongMessage));
                                 updateLastActivity(); // Update activity after sending ping
                             } else if (receivedData.type && receivedData.type.includes('pong')) {
-                                console.log('📥 Pong received:', receivedData);
+                                // console.log('📥 Pong received:', receivedData);
                             } else {
                                 // console.log('📥 Received message:', receivedData);
                                 updateLastActivity();
@@ -3648,6 +3650,49 @@
         startNewConversation();
         updateButtonVisibility();
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    // Ensure this is called when the chat widget opens
+    toggleButton.addEventListener('click', () => {
+        chatContainer.classList.toggle('open');
+        
+        if (chatContainer.classList.contains('open') && !currentSessionId) {
+            currentSessionId = generateUUID(); // Generate a new session ID
+            startNewConversation(); // Call the function to display the welcome message
+        }
+    });
+
+    // Also call startNewConversation on initial load if the widget is open by default
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatContainer = document.querySelector('.n8n-chat-widget .chat-container');
+        chatContainer.classList.add('open'); // Open by default as per your request
+        if (!currentSessionId) {
+            currentSessionId = generateUUID(); // Generate a new session ID
+            startNewConversation(); // Display welcome message on load
+        }
+    });
+
+
+
+    
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
