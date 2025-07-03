@@ -203,7 +203,13 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
     <script src="avatar3d.js"></script>
+    
     <script src="chat-widget.js" defer></script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatContainer = document.querySelector('.n8n-chat-widget .chat-container');
+            chatContainer.classList.add('open');
+        });
+    </script>
 </body>
 </html>
