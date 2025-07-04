@@ -1,9 +1,3 @@
-// Version: 0.0.6
-// Author: Prathamesh Patil
-// Date: 2025-07-03
-// Description: 1. Added ping/pong functionality to maintain WebSocket connection and prevent disconnection due to inactivity.
-//              2. Optimized table popup css for better view.
-
 (function() {
     // Create and inject styles (updated with audio player and recording feedback)
     const styles = `
