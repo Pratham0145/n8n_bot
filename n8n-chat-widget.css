@@ -1393,6 +1393,7 @@
 
 .n8n-chat-widget .n8n-toggle-switch .n8n-toggle-label {
     position: absolute;
+    top: 14px;
     right: 115px;
     color: #ffffff;
     font-size: 10px;
@@ -1406,6 +1407,7 @@
 }
 
 .n8n-chat-widget .n8n-toggle-switch .n8n-toggle-slider {
+    top: 14px;
     position: absolute;
     right: 75px;
     display: inline-block;
