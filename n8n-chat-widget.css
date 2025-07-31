@@ -863,7 +863,7 @@
     color: #fff;
     border-radius: 16px;
     padding: 10px 18px;
-    max-width: 60%;
+    max-width: 100%;
     min-width: 100px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -1567,4 +1567,161 @@ background: #fafafa;
 
 #trulience-iframe{
     border-radius: 20px 20px 0 0 !important;
+}
+
+
+
+/* Image Popup Styles */
+.n8n-dialog-backdrop {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    backdrop-filter: blur(2px) !important;
+    animation: fadeIn 0.2s ease-out !important;
+}
+
+.n8n-image-dialog {
+    position: relative !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    background: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+    overflow: hidden !important;
+    animation: scaleIn 0.2s ease-out !important;
+}
+
+.n8n-dialog-close-button {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    cursor: pointer !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    line-height: 1 !important;
+    z-index: 10001 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.n8n-dialog-close-button:hover {
+    background: rgba(0, 0, 0, 0.8) !important;
+    transform: scale(1.1) !important;
+}
+
+.n8n-dialog-close-button:active {
+    transform: scale(0.95) !important;
+}
+
+.n8n-responsive-popup-image {
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+    border-radius: 12px !important;
+}
+
+/* Image preview cursor */
+.n8n-image-preview {
+    cursor: pointer !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.n8n-image-preview:hover {
+    transform: scale(1.02) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .n8n-dialog-backdrop {
+        padding: 20px !important;
+    }
+    
+    .n8n-image-dialog {
+        max-width: 95vw !important;
+        max-height: 85vh !important;
+    }
+    
+    .n8n-responsive-popup-image {
+        max-width: 95vw !important;
+        max-height: 85vh !important;
+    }
+    
+    .n8n-dialog-close-button {
+        top: 10px !important;
+        right: 10px !important;
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 18px !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .n8n-image-dialog {
+        background: #2a2a2a !important;
+    }
+}
+
+/* Loading state */
+.n8n-popup-loading {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 200px !important;
+    color: #666 !important;
+}
+
+.n8n-popup-loading::after {
+    content: "Loading..." !important;
+    animation: pulse 1.5s ease-in-out infinite !important;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
 }
