@@ -909,13 +909,12 @@
 
 .n8n-chat-widget .n8n-copy-code-btn {
     position: absolute;
-    top: 8px;
-    right: 12px;
-    background: #007bff;
+    top: 1px;
+    right: 1px;
     color: #fff;
     border: none;
     border-radius: 4px;
-    padding: 2px 10px;
+    padding: 2px 5px;
     font-size: 12px;
     cursor: pointer;
     z-index: 2;
@@ -1724,3 +1723,4 @@ background: #fafafa;
         opacity: 1;
     }
 }
+
